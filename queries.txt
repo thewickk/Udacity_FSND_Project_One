@@ -1,0 +1,279 @@
+Blueprint of newsdata.sql
+
+/**************************************************************************/
+View to List Author, Title, and Slug for Articles
+
+CREATE VIEW article_summary AS
+SELECT
+authors.name AS "Article Author",
+articles.title AS "Article Title",
+articles.slug AS "Article Slug"
+FROM articles
+JOIN authors
+ON articles.author = authors.id
+ORDER BY authors.name;
+
+
+// Results of article_summar:
+
+SELECT * FROM article_summary;
+     Article Author     |           Article Title            |       Article Slug
+------------------------+------------------------------------+---------------------------
+ Anonymous Contributor  | Bad things gone, say good people   | bad-things-gone
+ Markoff Chaney         | Balloon goons doomed               | balloon-goons-doomed
+ Rudolf von Treppenwitz | Candidate is jerk, alleges rival   | candidate-is-jerk
+ Rudolf von Treppenwitz | Trouble for troubled troublemakers | trouble-for-troubled
+ Ursula La Multa        | There are a lot of bears           | so-many-bears
+ Ursula La Multa        | Bears love berries, alleges bear   | bears-love-berries
+ Ursula La Multa        | Goats eat Google's lawn            | goats-eat-googles
+ Ursula La Multa        | Media obsessed with bears          | media-obsessed-with-bears
+
+
+/**************************************************************************/
+
+
+
+
+/**************************************************************************/
+View to Seperate Slug from log.path
+Ex /article/goats-eat-googles --> goats-eat-googles
+
+CREATE VIEW slug_from_path AS
+SELECT
+articles.slug
+FROM
+articles
+JOIN log ON substr(log.path, length('/article/')+1) = articles.slug;
+
+         slug
+----------------------
+ candidate-is-jerk
+ goats-eat-googles
+ goats-eat-googles
+ balloon-goons-doomed
+ candidate-is-jerk
+
+/**************************************************************************/
+
+
+/**************************************************************************/
+View of Number of Views per Date:
+
+CREATE VIEW total_views_by_date AS
+SELECT date(time) AS "Date Viewed", COUNT(*) AS "Number of Views"
+FROM log
+GROUP BY date(time)
+ORDER BY date(time);
+
+SELECT * FROM total_views_by_date;
+ Date Viewed | Number of Views
+-------------+-----------------
+ 2016-07-01  |           38705
+ 2016-07-02  |           55200
+ 2016-07-03  |           54866
+ 2016-07-04  |           54903
+ 2016-07-05  |           54585
+ 2016-07-06  |           54774
+ 2016-07-07  |           54740
+ 2016-07-08  |           55084
+ 2016-07-09  |           55236
+ 2016-07-10  |           54489
+
+
+/**************************************************************************/
+
+
+
+/**************************************************************************/
+news=> CREATE VIEW slug_and_count AS
+news-> SELECT slug AS "Article Slug", COUNT(*) AS "Article View Count"
+news-> FROM slug_from_path
+news-> GROUP BY slug
+news-> ORDER BY "Article View Count" DESC;
+CREATE VIEW
+news=> SELECT * FROM slug_and_count;
+       Article Slug        | Article View Count
+---------------------------+--------------------
+ candidate-is-jerk         |             338647
+ bears-love-berries        |             253801
+ bad-things-gone           |             170098
+ goats-eat-googles         |              84906
+ trouble-for-troubled      |              84810
+ balloon-goons-doomed      |              84557
+ so-many-bears             |              84504
+ media-obsessed-with-bears |              84383
+(8 rows)
+
+
+/**************************************************************************/
+
+
+/**************************************************************************/
+
+CREATE VIEW not_found_error AS
+SELECT date(time) AS "Date", COUNT(*) AS "404 Errors"
+FROM log
+WHERE status LIKE '%404%'
+GROUP BY date(time)
+ORDER BY date(time);
+
+
+SELECT * FROM not_found_error;
+    Date    | 404 Errors
+------------+------------
+ 2016-07-01 |        274
+ 2016-07-02 |        389
+ 2016-07-03 |        401
+ 2016-07-04 |        380
+ 2016-07-05 |        423
+ 2016-07-06 |        420
+ 2016-07-07 |        360
+ 2016-07-08 |        418
+ 2016-07-09 |        410
+ 2016-07-10 |        371
+ 2016-07-11 |        403
+ 2016-07-12 |        373
+ 2016-07-13 |        383
+ 2016-07-14 |        383
+ 2016-07-15 |        408
+ 2016-07-16 |        374
+ 2016-07-17 |       1265
+ 2016-07-18 |        374
+ 2016-07-19 |        433
+ 2016-07-20 |        383
+ 2016-07-21 |        418
+ 2016-07-22 |        406
+ 2016-07-23 |        373
+ 2016-07-24 |        431
+ 2016-07-25 |        391
+ 2016-07-26 |        396
+ 2016-07-27 |        367
+ 2016-07-28 |        393
+ 2016-07-29 |        382
+ 2016-07-30 |        397
+ 2016-07-31 |        329
+(31 rows)
+
+
+/**************************************************************************/
+
+
+/**************************************************************************/
+
+CREATE VIEW percent_error AS
+SELECT
+not_found_error."Date", (100.00*not_found_error."404 Errors"/total_views_by_date."Number of Views")
+AS "Percent Error(%)"
+FROM not_found_error
+JOIN total_views_by_date
+ON not_found_error."Date" = total_views_by_date."Date Viewed"
+ORDER BY not_found_error."Date";
+
+CREATE VIEW
+
+SELECT * FROM percent_error;
+    Date    |    Percent Error(%)
+------------+------------------------
+ 2016-07-01 | 0.70791887353055160832
+ 2016-07-02 | 0.70471014492753623188
+ 2016-07-03 | 0.73087157802646447709
+ 2016-07-04 | 0.69212975611533067410
+ 2016-07-05 | 0.77493816982687551525
+ 2016-07-06 | 0.76678716179209113813
+ 2016-07-07 | 0.65765436609426379247
+ 2016-07-08 | 0.75884104277104059255
+ 2016-07-09 | 0.74226953436164820045
+ 2016-07-10 | 0.68087136853309842354
+ 2016-07-11 | 0.73949024716956896710
+ 2016-07-12 | 0.68017286967304290742
+ 2016-07-13 | 0.69409206234142805364
+ 2016-07-14 | 0.69389086165664178564
+ 2016-07-15 | 0.74233106509952330701
+ 2016-07-16 | 0.68626371609967338251
+ 2016-07-17 |     2.2626862468027260
+ 2016-07-18 | 0.67279497742359099822
+ 2016-07-19 | 0.78242171265427079381
+ 2016-07-20 | 0.70201807284124860238
+ 2016-07-21 | 0.75668434677141977879
+ 2016-07-22 | 0.73542730862587399920
+ 2016-07-23 | 0.67949138339344919299
+ 2016-07-24 | 0.78221415607985480944
+ 2016-07-25 | 0.71594675260469119074
+ 2016-07-26 | 0.72823568354849387620
+ 2016-07-27 | 0.67353043733597606856
+ 2016-07-28 | 0.71719254703724656459
+ 2016-07-29 | 0.69516478317046095612
+ 2016-07-30 | 0.72086140213897917310
+ 2016-07-31 | 0.71763551096084633003
+(31 rows)
+
+
+/**************************************************************************/
+
+
+
+/**************************************************************************/
+Solution to Question 1: What are the most popular three articles of all time?
+
+CREATE VIEW top_three_articles AS
+SELECT
+article_summary."Article Title" AS "Top Three Articles",
+slug_and_count."Article View Count" AS "Number of Views"
+FROM article_summary
+JOIN slug_and_count
+ON article_summary."Article Slug" = slug_and_count."Article Slug"
+ORDER BY slug_and_count."Article View Count" DESC
+LIMIT 3;
+CREATE VIEW
+news=> SELECT * FROM top_three_articles;
+        Top Three Articles        | Number of Views
+----------------------------------+-----------------
+ Candidate is jerk, alleges rival |          338647
+ Bears love berries, alleges bear |          253801
+ Bad things gone, say good people |          170098
+(3 rows)
+
+
+/**************************************************************************/
+
+
+
+/**************************************************************************/
+Solution to Question 2: Who are the most popular article authors of all time?
+
+CREATE VIEW top_authors AS
+SELECT
+article_summary."Article Author",
+SUM(slug_and_count."Article View Count") AS "Total Views"
+FROM article_summary
+JOIN slug_and_count
+ON article_summary."Article Slug" = slug_and_count."Article Slug"
+GROUP BY article_summary."Article Author"
+ORDER BY "Total Views" DESC;
+
+
+news=> SELECT * FROM top_authors;
+     Article Author     | Total Views
+------------------------+-------------
+ Ursula La Multa        |      507594
+ Rudolf von Treppenwitz |      423457
+ Anonymous Contributor  |      170098
+ Markoff Chaney         |       84557
+(4 rows)
+
+
+/**************************************************************************/
+
+
+/**************************************************************************/
+Solution to Question 3: On which days did more than 1% of requests lead to errors?
+
+SELECT * FROM percent_error
+WHERE percent_error."Percent Error(%)" > '1';
+    Date    |  Percent Error(%)
+------------+--------------------
+ 2016-07-17 | 2.2626862468027260
+(1 row)
+
+
+

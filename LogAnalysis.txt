@@ -1,0 +1,17 @@
+You are successfully connected to the news database!
+
+***Question 1: Top 3 Most Popular Articles***
+	"Candidate is jerk, alleges rival" - 338647 views
+	"Bears love berries, alleges bear" - 253801 views
+	"Bad things gone, say good people" - 170098 views
+
+
+***Question 2: Most Popular Article Authors of All-Time***
+	Ursula La Multa - 507594 views
+	Rudolf von Treppenwitz - 423457 views
+	Anonymous Contributor - 170098 views
+	Markoff Chaney - 84557 views
+
+
+***Question 3: Days With Greater Than One Percent "404 NOT FOUND" Errors***
+	July 17, 2016 - 2.3% errors
