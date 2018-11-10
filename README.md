@@ -9,7 +9,7 @@
 
 ## Instructions For Running This Program
 
-* It is possible that the psycopg2 library is not present in your current Python venv. If this is the case please run the following command within your venv directory to install psycopg2 **may require superuser privilages**:
+* It is possible that the psycopg2 library is not present in your current Python venv. If this is the case please run the following command within your venv directory to install psycopg2 **--may require superuser privilages**
 
 ```bash
 pip3 install psycopg2
