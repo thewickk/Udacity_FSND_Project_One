@@ -3,7 +3,7 @@
 ### This is the Log Analysis Project from the Udacity Full Stack Web Developer Nanodegree Program
 
 ## Software Requirements
-* Python 3.5.2
+* Python 3.5.2 or higher
 * (PostgreSQL) 9.5.14
 * psycopg2 2.7.6
 
