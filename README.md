@@ -14,14 +14,14 @@
 ```bash
 pip3 install psycopg2
 ```
-* Python 3 or greater is needed in order for Pyhton String Formatters to execute correctl
+* Python 3 or greater is needed in order for Python String Formatters to execute correctly
 
-* All of the views listed below under "Creat Views" **MUST** be created in order to the Python queries to execute successfully
+* All of the views listed below under "Create Views" **MUST** be created in order to the Python queries to execute successfully
 
 
 ## Create Views
 
-* Please use the following Views in order to successuflly run the queries contained in the newsdata_db.py Python file.
+* Please use the following Views in order to successfully run the queries contained in the newsdata_db.py Python file.
 
 ### View to List Author, Title, and Slug for Articles
 
