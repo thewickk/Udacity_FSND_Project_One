@@ -2,10 +2,26 @@
 
 ### This is the Log Analysis Project from the Udacity Full Stack Web Developer Nanodegree Program
 
+## Software Requirements
+* Python 3.5.2
+* (PostgreSQL) 9.5.14
+* psycopg2 2.7.6
+
+## Instructions For Running This Program
+
+* It is possible that the psycopg2 library is not present in your current Python venv. If this is the case please run the following command within your venv directory to install psycopg2:
+
+```bash
+pip3 install psycopg2
+```
+* Python 3 or greater is needed in order for Pyhton String Formatters to execute correctl
+
+* All of the views listed below under "Creat Views" **MUST** be created in order to the Python queries to execute successfully
+
 
 ## Create Views
 
--Please use the following Views in order to successuflly run the queries contained in the newsdata_db.py Python file.
+* Please use the following Views in order to successuflly run the queries contained in the newsdata_db.py Python file.
 
 ### View to List Author, Title, and Slug for Articles
 
