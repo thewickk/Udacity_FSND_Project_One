@@ -16,7 +16,7 @@ pip3 install psycopg2
 ```
 * Python 3 or greater is needed in order for Python String Formatters to execute correctly
 
-* All of the views listed below under "Create Views" **MUST** be created in order to the Python queries to execute successfully
+* All of the views listed below under "Create Views" **MUST** be created in order for the Python queries to execute successfully
 
 
 ## Create Views
