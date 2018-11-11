@@ -11,10 +11,10 @@
 
 ## Instructions For Installing Vagrant Virtual Machine
 
-**Instructions, the Vagrant VM, and the SQL database are courtesy of Udacity.com**
+**These instructions, the Vagrant VM, and the SQL database are courtesy of [Udacity.com](https://www.udacity.com) and their [Full Stack Web Developer Nanodegree Program](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004)**
 
 * **Install VirtualBox:**
-VirtualBox is the software that actually runs the virtual machine.You do not need the extension pack or the SDK. You do not need to launch VirtualBox after installing it; Vagrant will do that.
+VirtualBox is the software that actually runs the virtual machine. You do not need the extension pack or the SDK. You do not need to launch VirtualBox after installing it; Vagrant will do that.
 
 * **Install Vagrant:**
 Vagrant is the software that configures the VM and lets you share files between your host computer and the VM's filesystem. Install the version for your operating system.
@@ -67,9 +67,6 @@ python3 newsdata_db.py
 ```bash
 pip3 install psycopg2
 ```
-
-* All of the views listed below under "Create Views" **MUST** be created in order for the Python queries to execute successfully
-
 
 ## Create Views
 
