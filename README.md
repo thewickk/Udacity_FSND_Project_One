@@ -6,7 +6,7 @@
 * [Python 3.5.2 or higher]( https://www.python.org/downloads)
 * [(PostgreSQL) 9.5.14](https://www.postgresql.org/download/)
 * [psycopg2 2.7.6](http://initd.org/psycopg/download/)
-* [Vagrant 2.2.0](https://www.vagrantup.com/downloads)
+* [Vagrant 2.2.0](https://www.vagrantup.com/downloads.html)
 * [VirtualBox 5.2.2+](https://www.virtualbox.org/wiki/Downloads)
 
 ## Instructions For Installing Vagrant Virtual Machine
