@@ -1,6 +1,10 @@
 # Udacity_FSND_Project_One
 
 ### This is the Log Analysis Project from the Udacity Full Stack Web Developer Nanodegree Program
+* The purpose of this application is to use Python to connect to a PostgreSQL database and return the results of three queries that answer the following questions:
+    1. What are the most popular three articles of all time?
+    2. Who are the most popular article authors of all time?
+    3. On which days did more than 1% of requests lead to errors? 
 
 ## Software Requirements
 * [Python 3.5.2 or higher]( https://www.python.org/downloads)
