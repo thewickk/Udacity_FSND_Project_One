@@ -3,25 +3,77 @@
 ### This is the Log Analysis Project from the Udacity Full Stack Web Developer Nanodegree Program
 
 ## Software Requirements
-* Python 3.5.2 or higher
-* (PostgreSQL) 9.5.14
-* psycopg2 2.7.6
+* [Python 3.5.2 or higher]( https://www.python.org/downloads)
+* [(PostgreSQL) 9.5.14](https://www.postgresql.org/download/)
+* [psycopg2 2.7.6](http://initd.org/psycopg/download/)
+* [Vagrant 2.2.0](https://www.vagrantup.com/downloads)
+* [VirtualBox 5.2.2+](https://www.virtualbox.org/wiki/Downloads)
 
-## Instructions For Running This Program
+## Instructions For Installing Vagrant Virtual Machine
 
-* It is possible that the psycopg2 library is not present in your current Python venv. If this is the case please run the following command within your venv directory to install psycopg2 **--this may require superuser privilages**
+**Instructions, the Vagrant VM, and the SQL database are courtesy of Udacity.com**
+
+* **Install VirtualBox:**
+VirtualBox is the software that actually runs the virtual machine.You do not need the extension pack or the SDK. You do not need to launch VirtualBox after installing it; Vagrant will do that.
+
+* **Install Vagrant:**
+Vagrant is the software that configures the VM and lets you share files between your host computer and the VM's filesystem. Install the version for your operating system.
+
+Windows users: The Installer may ask you to grant network permissions to Vagrant or make a firewall exception. Be sure to allow this.
+
+* **Install the Vagrant VM:**
+There are a couple of different ways you can download the VM configuration.
+
+You can download and unzip this file: [FSND-Virtual-Machine.zip](https://s3.amazonaws.com/video.udacity-data.com/topher/2018/April/5acfbfa3_fsnd-virtual-machine/fsnd-virtual-machine.zip) This will give you a directory called FSND-Virtual-Machine. It may be located inside your Downloads folder.
+
+Alternately, you can use Github to fork and clone the repository [https://github.com/udacity/fullstack-nanodegree-vm](https://github.com/udacity/fullstack-nanodegree-vm).
+
+Either way, you will end up with a new directory containing the VM files. Change to this directory in your terminal with cd. Inside, you will find another directory called vagrant. Change directory to the vagrant directory:
+
+## Instructions for starting the Virtual Machine, connecting to the database, and running the Python file 
+
+* **Start the virtual machine**
+From your terminal, inside the vagrant subdirectory, run the command **vagrant up**. This will cause Vagrant to download the Linux operating system and install it. This may take quite a while (many minutes) depending on how fast your Internet connection is.
+
+When vagrant up is finished running, you will get your shell prompt back. At this point, you can run **vagrant ssh** to log in to your newly installed Linux VM!
+
+* **Download the SQL database**
+
+Next, [download the data here](https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip). You will need to unzip this file after downloading it. The file inside is called newsdata.sql. Put this file into the vagrant directory, which is shared with your virtual machine.
+
+To load the data, cd into the vagrant directory and use the command: 
+
+```bash
+psql -d news -f newsdata.sql.
+```
+After the database information finishes loading connect to the database with the following command:
+
+```bash
+psql -d news
+```
+
+* **Please execute all of the queries in the Create Views section below**
+
+Once all of the Views have been created you can exit the database and run the Python file.
+
+Run the Python file by executing the following command:
+
+```bash
+python3 newsdata_db.py
+```
+
+* It is possible that the psycopg2 library is not present in your current Python venv. If this is the case you will receive an error when running the Python file. If you receie an error referencing psycopg2, please run the following command within your venv directory to install psycopg2 **--this may require superuser privilages**
 
 ```bash
 pip3 install psycopg2
 ```
-* Python 3 or greater is needed in order for Python String Formatters to execute correctly
 
 * All of the views listed below under "Create Views" **MUST** be created in order for the Python queries to execute successfully
 
 
 ## Create Views
 
-* Please use the following Views in order to successfully run the queries contained in the newsdata_db.py Python file.
+* All of the views listed below under "Create Views" **MUST** be created in order for the Python queries to execute successfully
 
 ### View to List Author, Title, and Slug for Articles
 
