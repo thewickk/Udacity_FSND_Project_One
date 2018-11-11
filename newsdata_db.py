@@ -6,11 +6,18 @@ DBNAME = "news"
 
 
 def fsnd_project_1():
+    """This function executes three queries to the news database and prints
+    out the results of the following three questions:
+    1. What are the most popular three articles of all time?
+    2. Who are the most popular article authors of all time?
+    3. On which days did more than 1% of requests lead to errors?"""
+
     # Create database connection:
     db = psycopg2.connect(database=DBNAME)
 
     # If connection to database is successful execute queries:
-    if (db):
+    try:
+
         print("You are successfully connected "
               "to the {} database!\n".format(DBNAME))
 
@@ -50,13 +57,12 @@ def fsnd_project_1():
             print("\t{} - {:1.1f}% errors".format
                   (date.strftime('%B %d, %Y'), error))
 
-
         # Close database connection:
         db.close()
 
-    # Else if database connection fails, display failed to connect message
-    else:
-        print("Failed to connect to the database")
+    # If database connection fails print out error to user
+    except psycopg2.DatabaseError as e:
+        print("Could not connect to the database {}".format(DBNAME))
 
 
 if __name__ == "__main__":
