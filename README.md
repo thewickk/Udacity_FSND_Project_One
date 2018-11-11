@@ -23,7 +23,7 @@ VirtualBox is the software that actually runs the virtual machine. You do not ne
 * **Install Vagrant:**
 Vagrant is the software that configures the VM and lets you share files between your host computer and the VM's filesystem. Install the version for your operating system.
 
-Windows users: The Installer may ask you to grant network permissions to Vagrant or make a firewall exception. Be sure to allow this.
+**Windows users: The Installer may ask you to grant network permissions to Vagrant or make a firewall exception. Be sure to allow this.**
 
 * **Install the Vagrant VM:**
 There are a couple of different ways you can download the VM configuration.
@@ -32,7 +32,7 @@ You can download and unzip this file: [FSND-Virtual-Machine.zip](https://s3.amaz
 
 Alternately, you can use Github to fork and clone the repository [https://github.com/udacity/fullstack-nanodegree-vm](https://github.com/udacity/fullstack-nanodegree-vm).
 
-Either way, you will end up with a new directory containing the VM files. Change to this directory in your terminal with cd. Inside, you will find another directory called vagrant. Change directory to the vagrant directory:
+Either way, you will end up with a new directory containing the VM files. Change to this directory in your terminal with **cd**. Inside, you will find another directory called vagrant. Change directory to the vagrant directory:
 
 ## Instructions for starting the Virtual Machine, connecting to the database, and running the Python file 
 
@@ -45,10 +45,10 @@ When vagrant up is finished running, you will get your shell prompt back. At thi
 
 Next, [download the data here](https://d17h27t6h515a5.cloudfront.net/topher/2016/August/57b5f748_newsdata/newsdata.zip). You will need to unzip this file after downloading it. The file inside is called newsdata.sql. Put this file into the vagrant directory, which is shared with your virtual machine.
 
-To load the data, cd into the vagrant directory and use the command: 
+To load the data, **cd** into the vagrant directory and use the command: 
 
 ```bash
-psql -d news -f newsdata.sql.
+psql -d news -f newsdata.sql
 ```
 After the database information finishes loading connect to the database with the following command:
 
